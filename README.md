@@ -2,7 +2,7 @@
 
 Pipelines for building correlation networks from gene expression data.
 
-Currently there is one pipeline, pipeline_wgcna.py
+Currently there is one pipeline, pipeline_wgcna.py. The code has been used by the group for several projects but is still undergoing development and testing and should be considered "beta" - please do your own sanity checks if you use it!
 
 
 ## Installation
