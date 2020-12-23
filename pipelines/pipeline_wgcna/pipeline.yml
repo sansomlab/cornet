@@ -1,0 +1,178 @@
+report:
+  title: WGCNA analysis
+  author: Sansom lab
+
+annotation:
+  # Species
+  # Used to obtain gene annotations for gene set analyses
+  # Choices: 'hs' (for human) | 'mm' (for mouse)
+  species: hs
+
+  # Release of Ensembl gene annotations
+  # Choices: 'latest' or a specific number, e.g. 89,90 etc
+  ensembl_release: latest
+
+  # The ensembl host to use
+  # When set to "default" the default host of the biomaRt package will be used.
+  # The default biomaRt host is currently "www.ensembl.org".
+  # If the default host is down try e.g. "uswest.ensembl.org" or "useast.ensembl.org"
+  ensembl_host: default
+
+  # the idcol is the name of column in the Ensembl annotation
+  # that matches the identifiers used on the input gene expression matrix
+  # if your gene expression data ("exprs.data.tsv") data is:
+  # (i) labelled with official gene symbols -> use "gene_name"
+  # (ii) labelled with ensembl ids (ENSG...) -> use "ensembl_id"
+  #
+  idcol: ensembl_id
+  # the namecol is they column in the Ensembl annotation that contains
+  # the gene symbols, normally "gene_name".
+  namecol: gene_name
+
+input:
+  # The path to the expression data matrix.
+  # - The expression data should be supplied as a tsv file
+  #   with samples in columns and genes in rows.
+  # - Gene identifiers must be passed in an additional column that is named
+  #   to match the value given to the annotation "idcol" above.
+  expression_data:
+  # The path to the (optional) trait data matrix:
+  # - A matrix in tsv format of quantitative trait with the trait
+  #   variables in columns.
+  # - The sample names must be passed in an addition column that is named
+  #   "sample_name".
+  trait_data: None
+    # The path to the (optional) meta data matrix:
+  # - A matrix in tsv format of metadata with variables in columns.
+  # - Can include categorical and quantitative variables
+  # - The sample names must be passed in an additional column that is named
+  #   "sample_name".
+  meta_data: None
+
+  # Genelists to be compared against the module eigengenes
+  # can be supplied as a tsv file with the essential columns:
+  # _idcol_ | category | plot_group
+  # where _idcol_ matches the annotation_idcol above, e.g.
+  # ensembl_id | gene_name | category | plot_group
+  # seperate plots will be made for each level of the plot_group factor
+  genelists: None
+
+run:
+  genesets: True
+
+clean:
+  min_fraction: 0.5
+  min_n_samples: 4
+  min_n_genes: 4
+  min_relative_weight: 0.1
+  # cut height to use for excluding outlying samples
+  cut_height: 100
+  # minimum number of samples in cluster
+  min_size: 10
+
+module:
+  # choices are "stepwise" or "blockwise"
+  # when run stepwise, the adjacency matrix, tom and merging
+  # are performed in sequential pipeline tasks so that
+  # the parameters can be easily tuned.
+  detection: stepwise
+  threads: 12
+  # per thread memory
+  memory: 2000M
+  # block_size parameter is only used if detection is set to "blockwise".
+  block_size: 10000
+  soft_power: 4
+  # network type options, one of "signed", "unsigned" or "signed_hybrid"
+  network_type: signed_hybrid
+  adj_cor_fnc: pearson
+  adj_dist_fnc: dist
+  tom_type: unsigned
+  min_size: 30
+  diss_threshold: 0.25
+
+# trait column annotations for the eigengene expression plot
+# can be specifed as in the example below as either
+# per level colors (see e.g. patient) or color gradients (see eg. pct_CD3)
+#
+# traits:
+#   patient:
+#     P4: lightgreen
+#     P5: lightblue
+#     P6: lightyellow
+#   Cell_type:
+#     CD68: brown
+#     Epi: skyblue
+#     Mix: yellow
+#     Tcell: orange
+#     Rep: darkgreen
+#   AOISurfaceArea: white,grey,black
+#   AOINucleiCount: white,grey,black
+#   DeduplicatedReads: white,grey,black
+#   pct_CD3: white,yellow,red
+#   pct_CD68: white,lightblue,blue
+
+
+# Geneset over-representation analysis
+# ------------------------------------
+# (GO categories and KEGG pathways are analysed by default)
+
+genesets:
+    # A method recognised by the R "p.adjust" function
+  # The adjustment is applied to the combined results from
+  # all of the clusters.
+  padjust_method: BH
+
+  # Should the adjusted p-value be used for producing the
+  # summary heatmaps?
+  use_adjusted_pvalues: True
+
+  # The p-value threshold to be used for producing the
+  # summary heatmaps.
+  pvalue_threshold: 0.05
+
+  # The minimum odds ratio to be used for inclusion in the
+  # plots
+  min_odds_ratio: 1.5
+
+  # The minimum number of over-represented genes for
+  # inclusion in the plots
+  min_fg_genes: 3
+
+  # Should genesets significantly enriched in all clusters
+  # be shown in the summary heatmaps?
+  show_common: True
+
+  # Make per-cluster geneset plots where genesets are
+  # clustered by over-represented genes
+  # either "none" or a comma-separated list of geneset names
+  show_detailed: GO.BP
+
+gmt_pathway_files:
+
+  # Arbitrary genesets can be specified here using gmt files.
+  # the key is taken as the set name, and the value as the path to the gmt file, i.e.
+  # set_name: gmt_file_path
+  #
+  # note that the below files are species and site specific
+  #
+  # > human msigdb sets >
+  #
+  # msigdb_biocarta: /gfs/mirror/msigdb/msigdb_v7.1/msigdb_v7.1_GMTs/c2.cp.biocarta.v7.1.entrez.gmt
+  # msigdb_reactome: /gfs/mirror/msigdb/msigdb_v7.1/msigdb_v7.1_GMTs/c2.cp.reactome.v7.1.entrez.gmt
+  # msigdb_canonical_pathways: /gfs/mirror/msigdb/msigdb_v7.1/msigdb_v7.1_GMTs/c2.cp.v7.1.entrez.gmt
+  # msigdb_tf_motifs: /gfs/mirror/msigdb/msigdb_v7.1/msigdb_v7.1_GMTs/c3.tft.v7.1.entrez.gmt
+  # msigdb_immunological_signatures: /gfs/mirror/msigdb/msigdb_v7.1/msigdb_v7.1_GMTs/c7.all.v7.1.entrez.gmt
+  #
+  # > mouse msigdb sets >
+  #
+  # msigdb_biocarta: /gfs/mirror/msigdb/msigdb_v7.1/msigdb_v7.1_GMTs/c2.cp.biocarta.v7.1.entrez.mouse.gmt
+  # msigdb_reactome: /gfs/mirror/msigdb/msigdb_v7.1/msigdb_v7.1_GMTs/c2.cp.reactome.v7.1.entrez.mouse.gmt
+  # msigdb_canonical_pathways: /gfs/mirror/msigdb/msigdb_v7.1/msigdb_v7.1_GMTs/c2.cp.v7.1.entrez.mouse.gmt
+  # msigdb_tf_motifs: /gfs/mirror/msigdb/msigdb_v7.1/msigdb_v7.1_GMTs/c3.tft.v7.1.entrez.mouse.gmt
+  # msigdb_immunological_signatures: /gfs/mirror/msigdb/msigdb_v7.1/msigdb_v7.1_GMTs/c7.all.v7.1.entrez.mouse.gmt
+
+gmt_celltype_files:
+  # > human cell types >
+  #
+  # xCell: /gfs/mirror/xCell/xCell_entrezID.gmt
+  #

@@ -1,0 +1,37 @@
+\section{WGCNA parameterisation}
+
+The parameter choices for sample cleaning were:
+
+\begin{itemize}
+\item The minimum fraction of non-missing samples for a gene to be considered good: \minFraction
+\item The minimum number of non-missing samples for a gene to be considered good: \minSamples
+\item The minimum number of good genes: \minGenes
+\item The cut height for removing outlying samples: \cutHeight
+\item The minimum number of objects on branc to be considered a cluster: \clusterMinSize
+\end{itemize}
+
+The parameter choices for network analysis were:
+
+\begin{itemize}
+\item The dectection was run: \detection
+\item The network type: \networkType
+\item The soft power: \softPower
+\item The adjacency correlation function: \adjCorFunction
+\item The adjacency distance function: \adjDistFunction
+\item The TOM type: \tomType
+\item The minimum module size (number of genes): \minSize
+\item The dissimilarity threshold used for merging modules: \dissThreshold
+\end{itemize}
+
+\clearpage
+
+\subsection{Analysis of network topology}
+
+The soft power is chosen from this plot.
+
+\begin{figure}[H]
+\includegraphics[width=1.0\textwidth,height=0.9\textheight,keepaspectratio]{{{\powerDir/network_topology}}}
+\caption{Network topology}
+\end{figure}
+
+\clearpage

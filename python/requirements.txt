@@ -1,0 +1,5 @@
+cgatcore
+numpy
+pandas
+ruffus
+scipy
