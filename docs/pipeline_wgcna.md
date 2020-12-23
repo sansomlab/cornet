@@ -2,7 +2,7 @@
 
 This pipeline wraps the [WGCNA](https://horvath.genetics.ucla.edu/html/CoexpressionNetwork/Rpackages/WGCNA/) R package. The original publication for WGCNA can be found [here](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-9-559).
 
-It add a few extra plots, testing for geneset over represenation in the modules with [gsfisher](https://github.com/sansomlab/gsfisher) and investigation of correlation of set of arbitrary lists of genes of interest with module eigen genes.
+It add a few extra plots, testing for geneset over represenation in the modules with [gsfisher](https://github.com/sansomlab/gsfisher) and investigation of correlation of set of arbitrary lists of genes of interest with module eigengenes.
 
 ## General notes
 
@@ -36,4 +36,4 @@ For documentation of the input files please see the "input" section of the yml f
 
 * The geneset anaysis can be toggled on or off by setting the run_genesets parameter to True|False - this is useful for initial runs where parameter choices are being explored and optimised
 
-* Export for blockwise detection is experimental and untested. In general we have not needed to use blockwise detection (we have access to well-resourced cluster nodes).
+* Support for blockwise detection is experimental and untested. In general we have not needed to use blockwise detection (we have access to well-resourced cluster nodes).
