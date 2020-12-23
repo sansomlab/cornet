@@ -34,6 +34,6 @@ For documentation of the input files please see the "input" section of the yml f
 
 ## Additional notes on running the pipeline
 
-* The geneset anaysis can be toggled on or off by setting the run_genesets parameter to True|False - this is useful for initial runs where parameter choices are being explored and optimised
+* The geneset anaysis can be toggled on or off by setting the run_genesets parameter to True|False - this is useful for initial runs where parameter choices are being explored and optimised.
 
-* Support for blockwise detection is experimental and untested. In general we have not needed to use blockwise detection (we have access to well-resourced cluster nodes).
+* Support for blockwise detection is experimental and untested. In general we have not needed yet to use blockwise detection (but we are fortunate to have access to well-resourced cluster nodes).
