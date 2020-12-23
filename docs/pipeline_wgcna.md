@@ -2,7 +2,7 @@
 
 This pipeline wraps the [WGCNA](https://horvath.genetics.ucla.edu/html/CoexpressionNetwork/Rpackages/WGCNA/) R package. The original publication for WGCNA can be found [here](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-9-559).
 
-It add a few extra plots, testing for geneset over represenation in the modules with [gsfisher](https://github.com/sansomlab/gsfisher) and investigation of correlation of set of arbitrary lists of genes of interest with module eigengenes.
+It adds a few extra plots, testing for geneset over represenation in the modules with [gsfisher](https://github.com/sansomlab/gsfisher) and investigation of correlation of set of arbitrary lists of genes of interest with module eigengenes.
 
 ## General notes
 
