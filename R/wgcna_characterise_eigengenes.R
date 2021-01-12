@@ -11,6 +11,8 @@ stopifnot(
   require(dplyr)
 )
 
+options(bitmapType = "cairo")
+
 # Options ----
 rundir <- "/gfs/work/ssansom/covid_spatial/covid_old/wgcna_covid_qn"
 option_list <- list(
@@ -129,7 +131,7 @@ hm <- Heatmap(eg_mat,
         top_annotation = cann)
 
 png(file.path(opt$outdir,"eigengene_heatmap.png"),
-         width=10,height=8, units="in",
+         width=20,height=8, units="in",
          res=300)
 print(hm)
 dev.off()

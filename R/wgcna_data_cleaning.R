@@ -22,6 +22,8 @@ stopifnot(
   require(fastcluster)
 )
 
+options(bitmapType = "cairo")
+
 # Options ----
 
 option_list <- list(

@@ -21,6 +21,8 @@ stopifnot(
   require(ggplot2)
 )
 
+options(bitmapType = "cairo")
+
 # Options ----
 
 option_list <- list(
