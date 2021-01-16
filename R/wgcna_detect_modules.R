@@ -115,9 +115,8 @@ print(lnames2)
 
 # Call the hierarchical clustering function
 geneTree = hclust(as.dist(dissTOM), method = "average");
-# Plot the resulting clustering tree (dendrogram)
-sizeGrWindow(12,9)
 
+## Plot the resulting clustering tree (dendrogram)
 pdf(file = file.path(opt$outdir,
                      "clustering_of_genes_by_topological_overlap.pdf"),
     width = 12, height = 9)
@@ -150,7 +149,6 @@ pdf(file = file.path(opt$outdir,
                      "module_dendrogram.pdf"),
     width = 12, height = 9)
 
-sizeGrWindow(12,9)
 plotDendroAndColors(geneTree, dynamicColors, "Dynamic Tree Cut",
                     dendroLabels = FALSE, hang = 0.03,
                     addGuide = TRUE, guideHang = 0.05,
@@ -173,13 +171,13 @@ if(opt$adjcorfnc=="pearson")
   corfnc = "bicor"
   coropt = list(use = "p")
 } else {
-  
+
   stop("Correlation function not recognised")
 }
 
 
 # Calculate eigengenes
-MEList = moduleEigengenes(datExpr, 
+MEList = moduleEigengenes(datExpr,
                           colors = dynamicColors,
                           softPower = opt$softpower
                           )
@@ -191,8 +189,6 @@ METree = hclust(as.dist(MEDiss), method = "average");
 
 
 # Plot the result
-sizeGrWindow(7, 6)
-
 pdf(file = file.path(opt$outdir,
                      "clustering_of_module_eigengenes.pdf"),
     width = 7, height = 6)
@@ -220,9 +216,6 @@ mergedColors = merge$colors;
 # Eigengenes of the new merged modules:
 mergedMEs = merge$newMEs;
 
-sizeGrWindow(12, 9)
-
-
 # Rename to moduleColors
 moduleColors = mergedColors
 # Construct numerical labels corresponding to the colors
@@ -241,8 +234,6 @@ dev.off()
 
 
 # ---------- 4. Visualise the similarity of the modules ----------- #
-
-sizeGrWindow(6,6)
 
 pdf(file.path(opt$outdir, "eigengene_dendrogram.pdf"),
     width=6, height=6)

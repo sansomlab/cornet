@@ -121,7 +121,6 @@ MEs = orderMEs(MEs)
 moduleTraitCor = cor(MEs, datTraits, use = "p");
 moduleTraitPvalue = corPvalueStudent(moduleTraitCor, nSamples);
 
-sizeGrWindow(10,6)
 pdf(file.path(opt$outdir, "module_trait_relationships.pdf"),
     width=10, height=6)
 # Will display correlations and their p-values

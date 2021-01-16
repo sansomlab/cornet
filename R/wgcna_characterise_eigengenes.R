@@ -54,7 +54,16 @@ option_list <- list(
     default=NULL
     # default=file.path(rundir,"data.dir/qn.dir/meta.data.tsv"),
     # help='Table containing the trait data. Must contain column "sample_name"'
-  )
+  ),
+  make_option(
+      c("--figwidth"),
+      default=10,
+      help="figure width in inches"),
+  make_option(
+      c("--figheight"),
+      default=8,
+      help="figure width in inches")
+
 )
 
 opt <- parse_args(OptionParser(option_list=option_list))
@@ -125,18 +134,24 @@ corClust <- function(x)
 
 eg_mat <- t(as.matrix(eg))
 
+## remove the grey module which contains the
+## unassigned genes.
+eg_mat <- eg_mat[!rownames(eg_mat)=="MEgrey",]
+
 hm <- Heatmap(eg_mat,
         cluster_rows = corClust(t(eg_mat)),
         cluster_columns = corClust(eg_mat),
         top_annotation = cann)
 
 png(file.path(opt$outdir,"eigengene_heatmap.png"),
-         width=20,height=8, units="in",
-         res=300)
+    width=opt$figwidth,
+    height=opt$figheight,
+    units="in",
+    res=300)
 print(hm)
 dev.off()
 
-save(eg_mat, trait_df, cann, corClust, hm, cfuns,
+save(eg, eg_mat, trait_df, cann, corClust, hm, cfuns,
      file=file.path(opt$outdir, "eigengene.heatmap.Rdata"))
 
 
@@ -164,7 +179,6 @@ gp <- gp + geom_bar(stat="identity", alpha=0.7, color="black")
 gp <- gp + theme_classic() + ylab("numbers of genes positively\ncorrelated with module")
 gp <- gp + theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1),
                  legend.position = "none")
-gp
 
 ggsave(file.path(opt$outdir,"eigengene_numbers.png"),
        width=6,height=3, units = "in")
@@ -183,13 +197,8 @@ gp <- gp + theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1),
                  strip.background = element_blank(),
                  legend.position= "none")
 
-gp
-
 ggsave(file.path(opt$outdir,"eigengene_membership.png"),
        width=8,height=4.5, units = "in")
-
-
-
 
 mdata <- membership %>%
   group_by(module) %>%
@@ -218,7 +227,7 @@ gp <- gp + scale_x_discrete(breaks=mdata$x,
                             labels=mdata[[opt$namecol]])
 gp <- gp + facet_wrap(~module, drop=T, ncol=3, scales="free_x")
 gp <- gp + theme_classic()
-#gp <- gp + ggtitle("genes positively correlated with module eigengenes")
+
 gp <- gp + theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1),
                  axis.title.y=element_blank(),
                  axis.title.x=element_blank(),
@@ -228,7 +237,6 @@ gp <- gp + theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1),
                  strip.background = element_blank(),
                  plot.margin = unit(c(0,0.5,0,0.8), "cm"),
                  panel.spacing.x=unit(0.5, "lines"),panel.spacing.y=unit(0, "lines"))
-#gp
 
 ggsave(file.path(opt$outdir,"eigengene_correlations.png"),
        width=10,height=10, units = "in")
