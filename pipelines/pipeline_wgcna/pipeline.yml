@@ -111,6 +111,11 @@ module:
 #   pct_CD3: white,yellow,red
 #   pct_CD68: white,lightblue,blue
 
+plot:
+  # width of the eigengene heatmap
+  eigengene_heatmap_width: 10
+  # height of the eigengene heatmap
+  eigengene_heatmap_height: 8
 
 # Geneset over-representation analysis
 # ------------------------------------
