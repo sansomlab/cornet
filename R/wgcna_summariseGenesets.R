@@ -10,6 +10,8 @@ stopifnot(
   require(gsfisher)
 )
 
+options(bitmapType = "cairo")
+
 # Options ----
 
 option_list <- list(

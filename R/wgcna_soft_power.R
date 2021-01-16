@@ -5,7 +5,7 @@
 ## Description ----
 ##
 ## With optional blockwise-approach for speed.
-## 
+##
 ## Details ----
 ##
 ##
@@ -20,6 +20,8 @@ stopifnot(
   require(WGCNA),
   require(ggplot2)
 )
+
+options(bitmapType = "cairo")
 
 # Options ----
 
@@ -71,7 +73,7 @@ if("_must_set_" %in% unlist(opt))
 
 
 # make the output directory if it does not exist
-dir.create(opt$outdir, 
+dir.create(opt$outdir,
            showWarnings = FALSE)
 
 # --------------------- 1. setup ---------------------- #
@@ -107,38 +109,40 @@ if(opt$adjcorfnc=="pearson")
   corfnc = "bicor"
   coropt = list(use = "p")
 } else {
-  
+
   stop("Correlation function not recognised")
 }
 
-# Choose a set of soft-thresholding powers
+## Choose a set of soft-thresholding powers
 powers = c(c(1:10), seq(from = 12, to=20, by=2))
 
-#Call the network topology analysis function
+## Call the network topology analysis function
 sft = pickSoftThreshold(datExpr,
                         networkType = opt$networktype,
                         corFnc = corfnc,
                         corOptions = coropt,
-                        powerVector = powers, 
+                        powerVector = powers,
                         verbose = 5)
 
 
 # Plot the results:
-sizeGrWindow(9, 5)
-
 pdf(file = file.path(opt$outdir,"network_topology.pdf"),
     width = 9, height = 5)
-par(mfrow = c(1,2));
-cex1 = 0.9;
-# Scale-free topology fit index as a function of the soft-thresholding power
+
+par(mfrow = c(1,2))
+cex1 = 0.9
+
+## Scale-free topology fit index as a function of the soft-thresholding power
 plot(sft$fitIndices[,1], -sign(sft$fitIndices[,3])*sft$fitIndices[,2],
      xlab="Soft Threshold (power)",ylab="Scale Free Topology Model Fit,signed R^2",type="n",
-     main = paste("Scale independence"));
+     main = paste("Scale independence"))
 text(sft$fitIndices[,1], -sign(sft$fitIndices[,3])*sft$fitIndices[,2],
-     labels=powers,cex=cex1,col="red");
-# this line corresponds to using an R^2 cut-off of h
+     labels=powers,cex=cex1,col="red")
+
+## this line corresponds to using an R^2 cut-off of h
 abline(h=0.90,col="red")
-# Mean connectivity as a function of the soft-thresholding power
+
+## Mean connectivity as a function of the soft-thresholding power
 plot(sft$fitIndices[,1], sft$fitIndices[,5],
      xlab="Soft Threshold (power)",ylab="Mean Connectivity", type="n",
      main = paste("Mean connectivity"))

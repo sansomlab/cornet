@@ -22,6 +22,8 @@ stopifnot(
   require(fastcluster)
 )
 
+options(bitmapType = "cairo")
+
 # Options ----
 
 option_list <- list(
@@ -140,19 +142,15 @@ if (!gsg$allOK)
 # ------------------- 3. visualise the sample tree --------------------- #
 
 
-sampleTree = hclust(dist(exprs_data), method = "average");
+sampleTree = hclust(dist(exprs_data), method = "average")
 
 # Plot the sample tree: Open a graphic output window of size 12 by 9 inches
 # The user should change the dimensions if the window is too large or too small.
 
-
-sizeGrWindow(12,9)
-
 pdf(file = file.path(opt$outdir,
                      "sampleClustering.pdf"),
     width = 12, height = 9)
-par(cex = 0.6);
-par(mar = c(0,4,2,0))
+par(mar = c(0,4,2,0), cex=0.6)
 plot(sampleTree, main = "Sample clustering to detect outliers", sub="", xlab="", cex.lab = 1.5,
      cex.axis = 1.5, cex.main = 2)
 
@@ -214,8 +212,8 @@ pdf(file = file.path(opt$outdir,
                      "sampleClustering_with_traits.pdf"),
     width = 12, height = 9)
 
-par(cex = 0.6)
-par(mar = c(0,4,2,0))
+par(mar = c(0,4,2,0),
+    cex=0.6)
 
 # Re-cluster samples
 sampleTree2 = hclust(dist(datExpr), method = "average")

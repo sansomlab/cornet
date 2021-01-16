@@ -8,6 +8,8 @@ stopifnot(
   require(ComplexHeatmap)
 )
 
+options(bitmapType = "cairo")
+
 # Options ----
 rundir <- "/gfs/work/ssansom/covid_spatial/wgcna_covid_qn"
 option_list <- list(

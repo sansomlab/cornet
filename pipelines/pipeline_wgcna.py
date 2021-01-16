@@ -511,6 +511,8 @@ def characteriseEigengenes(infile, outfile):
                    --params=pipeline.yml
                    %(trait_data_stat)s
                    %(meta_data_stat)s
+                   --figwidth=%(plot_eigengene_heatmap_width)s
+                   --figheight=%(plot_eigengene_heatmap_height)s
                    --outdir=%(out_dir)s
                    &> %(log_file)s
                 '''
