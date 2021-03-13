@@ -112,7 +112,7 @@ for(trait in names(params$traits))
   colors <- strsplit(color_str,",")[[1]]
   print(colors)
   ncol <- length(colors)
-  quantiles <- c(0,1:(ncol-2)/(ncol-1),1)
+  quantiles <- 0:(ncol-1) * 1/(ncol-1)
   print(quantiles)
   breaks <- quantile(trait_data[[trait]],quantiles, na.rm=TRUE)
   print(breaks)
