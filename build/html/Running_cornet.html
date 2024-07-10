@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Running Cornet &mdash; CORNET  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Title" href="Pipeline.html" />
+    <link rel="prev" title="Data Preparation" href="Data_preparation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            CORNET
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Workflow_overview.html">Home</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Data_preparation.html">Data Preparation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Running Cornet</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#data-cleaning">Data Cleaning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#soft-power-selection">Soft Power selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-detection">Module detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#full-run">Full run</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Pipeline.html">Title</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">CORNET</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Running Cornet</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/Running_cornet.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="running-cornet">
+<h1>Running Cornet<a class="headerlink" href="#running-cornet" title="Permalink to this heading"></a></h1>
+<p>You are recommended to read the <a class="reference external" href="https://www.dropbox.com/scl/fo/4vqfiysan6rlurfo2pbnk/h?rlkey=thqg8wlpdn4spu3ihjuc1kmlu&amp;e=1&amp;dl=0/">WGCNA FAQ</a> before starting analysis.</p>
+<p>The initial parameters in pipeline.yml should be set as descibed on the <a class="reference internal" href="Data_preparation.html#data-preparation"><span class="std std-ref">Data Preparation</span></a> page.</p>
+<p>Tasks can be run using appropriate task name in the command:</p>
+<blockquote>
+<div><div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>python ~/path/to/cornet/pipelines/pipeline_wgcna.py make __task_name__
+</pre></div>
+</div>
+</div></blockquote>
+<p>The cleanData, softPower and detectModules tasks should initially be run to check parameterisation before running the full pipeline. The full pipeline can be ran using the ‘make full’ command.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you need to rerun any tasks of the pipeline then the appropriate sentinel file needs to be deleted before rerunning the task.</p>
+</div>
+<section id="data-cleaning">
+<h2>Data Cleaning<a class="headerlink" href="#data-cleaning" title="Permalink to this heading"></a></h2>
+<p>The parameters in the clean section of pipeline.yml refer to arguments for the <a class="reference external" href="https://www.rdocumentation.org/packages/WGCNA/versions/1.72-5/topics/goodSamplesGenes">goodSampleGenes</a> function from the R WGCNA package. The cut_height parameter is the cut height used to exclude samples from analysis as shown in the ‘sampleClustering’ dendrogram output. The ‘sampleClustering_with_traits’ output can be inspected to ensure that trait data is independent of sample similarity as expected.</p>
+</section>
+<section id="soft-power-selection">
+<h2>Soft Power selection<a class="headerlink" href="#soft-power-selection" title="Permalink to this heading"></a></h2>
+<p>This task returns network topology plots which should be inspected to inform soft power selection for downstream processing (See <a class="reference external" href="https://www.dropbox.com/scl/fo/4vqfiysan6rlurfo2pbnk/h?rlkey=thqg8wlpdn4spu3ihjuc1kmlu&amp;e=2&amp;dl=0%2F.">WGCNA tutorial</a>). The soft_power parameter in the pipeline.yml file should be updated to the selected soft power after running this task.</p>
+</section>
+<section id="module-detection">
+<h2>Module detection<a class="headerlink" href="#module-detection" title="Permalink to this heading"></a></h2>
+<p>This task should be run to check module merging before running the full pipeline. In particular the min_size parameter dictates the minimumn number of genes included in a module, and the diss_threshold dictates the dissimilarity threshold used to merge modules, this is visualised on the ‘Clustering of module eigengenes’ plot output.</p>
+<p>In general we use a ‘signed hybrid’ network and ‘bicor’ correlation unless any of the assumptions described in the <a class="reference external" href="https://www.dropbox.com/scl/fo/4vqfiysan6rlurfo2pbnk/h?rlkey=thqg8wlpdn4spu3ihjuc1kmlu&amp;e=1&amp;dl=0/">WGCNA FAQ</a> are violated.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The blockwise module detection functionality is experimental and untested.</p>
+</div>
+</section>
+<section id="full-run">
+<h2>Full run<a class="headerlink" href="#full-run" title="Permalink to this heading"></a></h2>
+<p>Other outputs of the pipeline include a heatmap of module-trait relationships, a heatmap of eigengenes per sample, a plot of genes that correlate with eigenegenes, a module gene membership table and a module eigenegene expression matrix.</p>
+<p>The pipeline performs testing for gene set over representation in modules using <a class="reference external" href="https://github.com/sansomlab/gsfisher">gsfisher</a> generating both summary plots and a full table of results</p>
+<p>The pipeline will also produce a full pdf report of the key results from this analysis, this can be found in the ‘reports’ folder.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Data_preparation.html" class="btn btn-neutral float-left" title="Data Preparation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Pipeline.html" class="btn btn-neutral float-right" title="Title" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Tarrion Baird, Stephen Sansom.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
