@@ -3,6 +3,12 @@ Running Cornet
 
 You are recommended to read the `WGCNA FAQ <https://www.dropbox.com/scl/fo/4vqfiysan6rlurfo2pbnk/h?rlkey=thqg8wlpdn4spu3ihjuc1kmlu&e=1&dl=0/>`_ before starting analysis.
 
+The pipeline.yml file can be accessed through running the following command:
+
+.. code-block:: Bash
+
+    python ~/path/to/cornet/pipelines/pipeline_wgcna.py config
+
 The initial parameters in pipeline.yml should be set as descibed on the :ref:`Data Preparation` page.
 
 Tasks can be run using appropriate task name in the command:
