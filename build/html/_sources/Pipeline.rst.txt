@@ -1,5 +1,5 @@
 Title
 =============
 
-.. automodule:: pipeline_wgcnaa
+.. automodule:: pipeline_wgcna
    :members:
