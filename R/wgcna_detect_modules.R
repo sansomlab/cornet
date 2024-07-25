@@ -67,6 +67,11 @@ option_list <- list(
     help='dissimilarity threshold for merging modules'
   ),
   make_option(
+    c("--deepsplit"),
+    default=3,
+    help='number from 0-4 for deep split parameter'
+  ),
+  make_option(
     c("--adjcorfnc"),
     default="_must_set_",
     help=paste("the function to be used to calculate co-expression similarity",
@@ -129,11 +134,13 @@ dev.off()
 
 # We like large modules, so we set the minimum module size relatively high:
 minModuleSize = opt$minmodulesize
+dpsplit = opt$deepsplit
+
 
 # Module identification using dynamic tree cut:
 dynamicMods = cutreeDynamic(dendro = geneTree,
                             distM = dissTOM,
-                            deepSplit = 2,
+                            deepSplit = dpsplit,
                             pamRespectsDendro = FALSE,
                             minClusterSize = minModuleSize)
 

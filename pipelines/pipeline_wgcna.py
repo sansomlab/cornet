@@ -363,6 +363,7 @@ def detectModules(infiles, outfile):
                    --minmodulesize=%(module_min_size)s
                    --medissthreshold=%(module_diss_threshold)s
                    --adjcorfnc=%(module_adj_cor_fnc)s
+                   --deepsplit=%(module_deepsplit)s
                    &> %(log_file)s
                 '''
 
