@@ -6,7 +6,8 @@ stopifnot(
   require(gplots),
   require(openxlsx),
   require(xtable),
-  require(tenxutils),
+#  require(tenxutils),
+  require(cellhub),
   require(gsfisher)
 )
 

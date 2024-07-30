@@ -86,7 +86,7 @@
   <section id="running-cornet">
 <h1>Running Cornet<a class="headerlink" href="#running-cornet" title="Permalink to this heading"></a></h1>
 <p>You are recommended to read the <a class="reference external" href="https://www.dropbox.com/scl/fo/4vqfiysan6rlurfo2pbnk/h?rlkey=thqg8wlpdn4spu3ihjuc1kmlu&amp;e=1&amp;dl=0/">WGCNA FAQ</a> before starting analysis.</p>
-<p>The pipeline.yml file can be accessed through running the following command:</p>
+<p>The pipeline.yml file can be accessed by running the following command:</p>
 <div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>python ~/path/to/cornet/pipelines/pipeline_wgcna.py config
 </pre></div>
 </div>
@@ -97,14 +97,14 @@
 </pre></div>
 </div>
 </div></blockquote>
-<p>The cleanData, softPower and detectModules tasks should initially be run to check parameterisation before running the full pipeline. The full pipeline can be ran using the ‘make full’ command.</p>
+<p>The cleanData, softPower and detectModules tasks should initially be run to check parameterisation before running the full pipeline. The full pipeline can be run using the ‘make full’ command.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you need to rerun any tasks of the pipeline then the appropriate sentinel file needs to be deleted before rerunning the task.</p>
+<p>If you need to rerun any tasks of the pipeline then the appropriate sentinel file needs to be deleted prior to rerunning the task.</p>
 </div>
 <section id="data-cleaning">
 <h2>Data Cleaning<a class="headerlink" href="#data-cleaning" title="Permalink to this heading"></a></h2>
-<p>The parameters in the clean section of pipeline.yml refer to arguments for the <a class="reference external" href="https://www.rdocumentation.org/packages/WGCNA/versions/1.72-5/topics/goodSamplesGenes">goodSampleGenes</a> function from the R WGCNA package. The cut_height parameter is the cut height used to exclude samples from analysis as shown in the ‘sampleClustering’ dendrogram output. The ‘sampleClustering_with_traits’ output can be inspected to ensure that trait data is independent of sample similarity as expected.</p>
+<p>The parameters in the clean section of pipeline.yml refer to arguments for the <a class="reference external" href="https://www.rdocumentation.org/packages/WGCNA/versions/1.72-5/topics/goodSamplesGenes">goodSampleGenes</a> function from the R WGCNA package. The cut_height parameter is the cut height used to exclude samples from analysis as shown in the ‘sampleClustering’ dendrogram output. The ‘sampleClustering_with_traits’ output can be inspected assess the clustering of samples by trait.</p>
 </section>
 <section id="soft-power-selection">
 <h2>Soft Power selection<a class="headerlink" href="#soft-power-selection" title="Permalink to this heading"></a></h2>
@@ -112,7 +112,7 @@
 </section>
 <section id="module-detection">
 <h2>Module detection<a class="headerlink" href="#module-detection" title="Permalink to this heading"></a></h2>
-<p>This task should be run to check module merging before running the full pipeline. In particular the min_size parameter dictates the minimumn number of genes included in a module, and the diss_threshold dictates the dissimilarity threshold used to merge modules, this is visualised on the ‘Clustering of module eigengenes’ plot output.</p>
+<p>This task should be run to check module merging before running the full pipeline. In particular the min_size parameter dictates the minimumn number of genes included in a module, the deepsplit parameter provides control over the cluster separation sensitivity, and the diss_threshold dictates the dissimilarity threshold used to merge modules, this is visualised on the ‘Clustering of module eigengenes’ plot output.</p>
 <p>In general we use a ‘signed hybrid’ network and ‘bicor’ correlation unless any of the assumptions described in the <a class="reference external" href="https://www.dropbox.com/scl/fo/4vqfiysan6rlurfo2pbnk/h?rlkey=thqg8wlpdn4spu3ihjuc1kmlu&amp;e=1&amp;dl=0/">WGCNA FAQ</a> are violated.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -121,9 +121,9 @@
 </section>
 <section id="full-run">
 <h2>Full run<a class="headerlink" href="#full-run" title="Permalink to this heading"></a></h2>
-<p>Other outputs of the pipeline include a heatmap of module-trait relationships, a heatmap of eigengenes per sample, a plot of genes that correlate with eigenegenes, a module gene membership table and a module eigenegene expression matrix.</p>
-<p>The pipeline performs testing for gene set over representation in modules using <a class="reference external" href="https://github.com/sansomlab/gsfisher">gsfisher</a> generating both summary plots and a full table of results</p>
-<p>The pipeline will also produce a full pdf report of the key results from this analysis, this can be found in the ‘reports’ folder.</p>
+<p>Other outputs of the pipeline include a heatmap of module-trait relationships, a heatmap of eigengenes per sample, a plot of genes that correlate with eigenegenes, a module gene membership table (formed from genes which significantly correlate with the module eigengene) and a module eigenegene expression matrix.</p>
+<p>The pipeline performs testing for gene set over representation in modules using <a class="reference external" href="https://github.com/sansomlab/gsfisher">gsfisher</a> generating both summary plots and a full table of results.</p>
+<p>The pipeline will also produce a full pdf report of the key results from this analysis, this can be found in the ‘report’ folder.</p>
 </section>
 </section>
 

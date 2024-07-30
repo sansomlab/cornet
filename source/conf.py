@@ -13,9 +13,29 @@
 import os
 import sys
 import sphinx_rtd_theme
+from pathlib import Path
+from ruffus import *
+import shutil
+import glob
+import sqlite3
+import numpy as np
+import pandas as pd
+import textwrap
+import subprocess
+from scipy.stats.mstats import gmean
+import cgatcore.experiment as E
+from cgatcore import pipeline as P
+import cgatcore.iotools as IOTools
 
-# sys.path.insert(0, os.path.abspath('.'))
-sys.path.insert(0, os.path.abspath('../pipelines'))
+# import local pipeline utility functions
+#from ../pipelines/pipeline_utils import templates
+
+sys.path.insert(0, os.path.abspath('..'))
+#sys.path.insert(0, os.path.abspath('../pipelines')
+sys.path.insert(1, os.path.abspath('../pipelines'))
+print(sys.path)
+
+#from pipeline_utils import templates
 
 print(sys.executable)
 # -- Project information -----------------------------------------------------
