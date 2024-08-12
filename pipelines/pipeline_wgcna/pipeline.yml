@@ -35,19 +35,19 @@ input:
   #   with samples in columns and genes in rows.
   # - Gene identifiers must be passed in an additional column that is named
   #   to match the value given to the annotation "idcol" above.
-  expression_data:
+  expression_data: .
   # The path to the (optional) trait data matrix:
   # - A matrix in tsv format of quantitative trait with the trait
   #   variables in columns.
   # - The sample names must be passed in an addition column that is named
   #   "sample_name".
-  trait_data: None
+  trait_data: .
     # The path to the (optional) meta data matrix:
   # - A matrix in tsv format of metadata with variables in columns.
   # - Can include categorical and quantitative variables
   # - The sample names must be passed in an additional column that is named
   #   "sample_name".
-  meta_data: None
+  meta_data: .
 
   # Genelists to be compared against the module eigengenes
   # can be supplied as a tsv file with the essential columns:

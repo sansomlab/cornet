@@ -1,4 +1,4 @@
-Title
+Pipelines
 =============
 
 .. automodule:: pipeline_wgcna
