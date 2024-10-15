@@ -52,8 +52,8 @@ cran_packages <- c("ape",
 bioconductor_packages <- c("ComplexHeatmap",
                            "WGCNA")
 
-github_packages <- c("sansomlab/gsfisher",
-                     "sansomlab/tenx/tenxutils")
+github_packages <- c("sansomlab/gsfisher")#,
+#                     "sansomlab/tenx/tenxutils")
 
 message("installing cran packages")
 for(x in cran_packages)

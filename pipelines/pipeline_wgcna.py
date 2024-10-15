@@ -106,6 +106,7 @@ else:
     raise ValueError("Could not set the location of the tenx code directory")
 
 
+
 # ----------------------- < pipeline configuration > ------------------------ #
 
 # handle pipeline configuration
@@ -118,7 +119,6 @@ if len(sys.argv) > 1:
 # ################# Sanity check and parse the input files ################## #
 # ########################################################################### #
 
-global EXPRESSION_DATA_PATH
 EXPRESSION_DATA_PATH = PARAMS["input_expression_data"]
 
 if not os.path.exists(EXPRESSION_DATA_PATH):
@@ -126,11 +126,10 @@ if not os.path.exists(EXPRESSION_DATA_PATH):
 
 # optional trait and metadata inputs
 
-global TRAIT_DATA_STAT
 if not PARAMS["input_trait_data"] is None:
     trait_data_path = PARAMS["input_trait_data"]
 
-    if not os.path.isfile(trait_data_path):
+    if not os.path.exists(trait_data_path):
         raise ValueError("trait file not found")
 
     else:
@@ -139,11 +138,10 @@ if not PARAMS["input_trait_data"] is None:
 else:
     TRAIT_DATA_STAT = ""
 
-global META_DATA_STAT
 if not PARAMS["input_meta_data"] is None:
     meta_data_path = PARAMS["input_meta_data"]
 
-    if not os.path.isfile(meta_data_path):
+    if not os.path.exists(meta_data_path):
         raise ValueError("meta file not found")
 
     else:
