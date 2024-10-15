@@ -85,10 +85,12 @@ module:
   # network type options, one of "signed", "unsigned" or "signed_hybrid"
   network_type: signed_hybrid
   adj_cor_fnc: pearson
+  deepsplit: 2
   adj_dist_fnc: dist
   tom_type: unsigned
   min_size: 30
   diss_threshold: 0.25
+  
 
 # trait column annotations for the eigengene expression plot
 # can be specifed as in the example below as either
