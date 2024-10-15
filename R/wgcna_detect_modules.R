@@ -68,7 +68,7 @@ option_list <- list(
   ),
   make_option(
     c("--deepsplit"),
-    default=3,
+    default=2,
     help='number from 0-4 for deep split parameter'
   ),
   make_option(
