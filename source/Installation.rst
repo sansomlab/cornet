@@ -17,7 +17,7 @@ Installation
 
 #. Install the cgat-core pipeline system following the instructions here `https://github.com/cgat-developers/cgat-core/ <https://github.com/cgat-developers/cgat-core/>`_.
 
-#. Clone and install the txseq repository e.g.
+#. Clone and install the cornet repository e.g.
 
     .. code-block:: Bash
      
