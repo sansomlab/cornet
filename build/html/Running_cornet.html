@@ -54,6 +54,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#soft-power-selection">Soft Power selection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-detection">Module detection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#full-run">Full run</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#additional-note">Additional note</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Pipeline.html">Pipelines</a></li>
@@ -86,32 +87,35 @@
   <section id="running-cornet">
 <h1>Running Cornet<a class="headerlink" href="#running-cornet" title="Permalink to this heading"></a></h1>
 <p>You are recommended to read the <a class="reference external" href="https://www.dropbox.com/scl/fo/4vqfiysan6rlurfo2pbnk/h?rlkey=thqg8wlpdn4spu3ihjuc1kmlu&amp;e=1&amp;dl=0/">WGCNA FAQ</a> before starting analysis.</p>
-<p>The pipeline.yml file can be accessed by running the following command:</p>
+<p>The following command loads the pipeline.yml configuration file:</p>
 <div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>python ~/path/to/cornet/pipelines/pipeline_wgcna.py config
 </pre></div>
 </div>
-<p>The initial parameters in pipeline.yml should be set as descibed on the <a class="reference internal" href="Data_preparation.html#data-preparation"><span class="std std-ref">Data Preparation</span></a> page.</p>
-<p>Tasks can be run using appropriate task name in the command:</p>
+<p>The key parameters for the analysis are defined in this pipeline.yml file - these will need to be set on a case by case basis. The input data parameters in pipeline.yml should be set as descibed on the <a class="reference internal" href="Data_preparation.html#data-preparation"><span class="std std-ref">Data Preparation</span></a> page.</p>
+<p>In general use of a signed or signed hybrid network and bicor correlation is recommended (see cautionary notes and advice in the <a class="reference external" href="https://www.dropbox.com/scl/fo/4vqfiysan6rlurfo2pbnk/h?rlkey=thqg8wlpdn4spu3ihjuc1kmlu&amp;e=1&amp;dl=0/">WGCNA FAQ</a>).</p>
+<p>Tasks can be run by using an appropriate task name in the command:</p>
 <blockquote>
 <div><div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>python ~/path/to/cornet/pipelines/pipeline_wgcna.py make __task_name__
 </pre></div>
 </div>
 </div></blockquote>
-<p>The cleanData, softPower and detectModules tasks should initially be run to check parameterisation before running the full pipeline. The full pipeline can be run using the ‘make full’ command.</p>
+<p>The cleanData, softPower and detectModules tasks should be run to check parameterisation before running the full pipeline. The full pipeline can then be run using the ‘make full’ command.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If you need to rerun any tasks of the pipeline then the appropriate sentinel file needs to be deleted prior to rerunning the task.</p>
 </div>
 <section id="data-cleaning">
 <h2>Data Cleaning<a class="headerlink" href="#data-cleaning" title="Permalink to this heading"></a></h2>
-<p>The parameters in the clean section of pipeline.yml refer to arguments for the <a class="reference external" href="https://www.rdocumentation.org/packages/WGCNA/versions/1.72-5/topics/goodSamplesGenes">goodSampleGenes</a> function from the R WGCNA package. The cut_height parameter is the cut height used to exclude samples from analysis as shown in the ‘sampleClustering’ dendrogram output. The ‘sampleClustering_with_traits’ output can be inspected assess the clustering of samples by trait.</p>
+<p>After running “make cleanData” inspect the plots in “wgcna.dir/clean.dir” to check the thresholds for sample exclusion etc are appropriate (see the “clean” section of pipeline.yml). If you need to update parameters “rm” the “wgcna.dir/modules.dir” (or delete the sentinel file) before re-running the task.</p>
+<p>The parameters in the clean section of pipeline.yml refer to arguments for the <a class="reference external" href="https://www.rdocumentation.org/packages/WGCNA/versions/1.72-5/topics/goodSamplesGenes">goodSampleGenes</a> function from the R WGCNA package. The cut_height parameter is the cut height used to exclude samples from analysis, as shown in the ‘sampleClustering’ dendrogram output. The ‘sampleClustering_with_traits’ output can be inspected to assess the clustering of samples by trait.</p>
 </section>
 <section id="soft-power-selection">
 <h2>Soft Power selection<a class="headerlink" href="#soft-power-selection" title="Permalink to this heading"></a></h2>
-<p>This task returns network topology plots which should be inspected to inform soft power selection for downstream processing (See <a class="reference external" href="https://www.dropbox.com/scl/fo/4vqfiysan6rlurfo2pbnk/h?rlkey=thqg8wlpdn4spu3ihjuc1kmlu&amp;e=2&amp;dl=0%2F.">WGCNA tutorial</a>). The soft_power parameter in the pipeline.yml file should be updated to the selected soft power after running this task.</p>
+<p>After running “make softPower” it is essential to inspect the network toplogy plots in the “wgcna.dir/soft.power.dir” and to update the yml with an appropriate soft power as guided by the WGCNA documentation and tutorials before continuing (See <a class="reference external" href="https://www.dropbox.com/scl/fo/4vqfiysan6rlurfo2pbnk/h?rlkey=thqg8wlpdn4spu3ihjuc1kmlu&amp;e=2&amp;dl=0%2F.">WGCNA tutorial</a>).</p>
 </section>
 <section id="module-detection">
 <h2>Module detection<a class="headerlink" href="#module-detection" title="Permalink to this heading"></a></h2>
+<p>After running “make detectModules” inspect the plots in the “wgcna.dir/modules.dir” to check that you are happy with the module merging and update the pipeline.yml “module” section accordingly. If you need to update parameters “rm” the “wgcna.dir/modules.dir” (or delete the sentinel file) before re-running the task.</p>
 <p>This task should be run to check module merging before running the full pipeline. In particular the min_size parameter dictates the minimumn number of genes included in a module, the deepsplit parameter provides control over the cluster separation sensitivity, and the diss_threshold dictates the dissimilarity threshold used to merge modules, this is visualised on the ‘Clustering of module eigengenes’ plot output.</p>
 <p>In general we use a ‘signed hybrid’ network and ‘bicor’ correlation unless any of the assumptions described in the <a class="reference external" href="https://www.dropbox.com/scl/fo/4vqfiysan6rlurfo2pbnk/h?rlkey=thqg8wlpdn4spu3ihjuc1kmlu&amp;e=1&amp;dl=0/">WGCNA FAQ</a> are violated.</p>
 <div class="admonition note">
@@ -121,9 +125,12 @@
 </section>
 <section id="full-run">
 <h2>Full run<a class="headerlink" href="#full-run" title="Permalink to this heading"></a></h2>
-<p>Other outputs of the pipeline include a heatmap of module-trait relationships, a heatmap of eigengenes per sample, a plot of genes that correlate with eigenegenes, a module gene membership table (formed from genes which significantly correlate with the module eigengene) and a module eigenegene expression matrix.</p>
-<p>The pipeline performs testing for gene set over representation in modules using <a class="reference external" href="https://github.com/sansomlab/gsfisher">gsfisher</a> generating both summary plots and a full table of results.</p>
-<p>The pipeline will also produce a full pdf report of the key results from this analysis, this can be found in the ‘report’ folder.</p>
+<p>Once you are happy with the parameterisation of the previous steps you can build a folder containing a PDF report, module membership tsv file, geneset xlsx document, eigengene matrix tsv and eigengene expression heatmap by calling the pipeline with “make report”.</p>
+<p>The pipeline performs testing for gene set over representation in modules using <a class="reference external" href="https://github.com/sansomlab/gsfisher">gsfisher</a>, generating both summary plots and a full table of results.</p>
+</section>
+<section id="additional-note">
+<h2>Additional note<a class="headerlink" href="#additional-note" title="Permalink to this heading"></a></h2>
+<p>Support for blockwise detection is experimental and untested. In general we have not needed yet to use blockwise detection (but we are fortunate to have access to well-resourced cluster nodes).</p>
 </section>
 </section>
 

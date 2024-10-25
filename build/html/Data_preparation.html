@@ -89,11 +89,11 @@
 <h2>Expression Data<a class="headerlink" href="#expression-data" title="Permalink to this heading"></a></h2>
 <p>Please see the <a class="reference external" href="https://www.dropbox.com/scl/fo/4vqfiysan6rlurfo2pbnk/h?rlkey=thqg8wlpdn4spu3ihjuc1kmlu&amp;e=1&amp;dl=0/">WGCNA FAQ</a> for advice on filtering out
 low expressed genes, transforming and normalising the data.
-The expression data needs to be saved as a tab-separated file. The gene idenfiers need to be in a column named with a value which is passed to the “idcol” annotation in pipeline.yml.</p>
+The expression data needs to be a tab-separated file. The gene idenfiers need to be in a column with the same name as the “idcol” paramter in pipeline.yml.</p>
 </section>
 <section id="trait-data">
 <h2>Trait Data<a class="headerlink" href="#trait-data" title="Permalink to this heading"></a></h2>
-<p>The trait data should be a tab-separated file containing quantitative trait data with the samples in a column titled ‘sample_name’.</p>
+<p>The trait data should be a tab-separated file containing quantitative variables with the samples in a column titled ‘sample_name’.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Each level of the trait data should be encoded as 0 and 1.</p>
@@ -107,8 +107,8 @@ The expression data needs to be saved as a tab-separated file. The gene idenfier
 </section>
 <section id="gene-list">
 <h2>Gene List<a class="headerlink" href="#gene-list" title="Permalink to this heading"></a></h2>
-<p>A tab-separated file containing a list of genes to compre to the module eigenegenes should be provided.</p>
-<p>This table should contain gene identifiers in a column named the same as the “idcol” annotation and the expression data, along with a “gene_name” column containing equivalent gene names, and 2 columns named “category” and “plot_group”, each containing character strings, to dictate plotting behaviour.</p>
+<p>A tab-separated file containing a list of genes to correlate to the module eigenegenes.</p>
+<p>This table should contain gene identifiers in a column named the same as the “idcol” parameter in the pipeline.yml file, along with a “gene_name” column containing equivalent gene names, and 2 columns named “category” and “plot_group”, each containing character strings, to dictate plotting behaviour.</p>
 </section>
 </section>
 
