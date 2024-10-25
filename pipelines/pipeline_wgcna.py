@@ -444,7 +444,7 @@ else:
            r"\1/membership.dir/membership.sentinel")
 def characteriseModules(infiles, outfile):
     '''
-    Run the module detection
+    Characterise the modules and compare to trait data
     '''
 
     modulesx, annotationsx, cleanx = infiles
@@ -529,7 +529,7 @@ def characteriseEigengenes(infile, outfile):
            r"\1/eigengenes.dir/eigengenes.vs.genelists.sentinel")
 def eigengenesVsGenelists(infiles, outfile):
     '''
-    Characterise the eigen genes
+    Characterise the eigen genes, compare to gene lists
     '''
 
     modulex, annotationx, cleanx = infiles
