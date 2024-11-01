@@ -32,3 +32,6 @@ tramp
 
 # Testing files
 test
+
+# docs
+build/*
