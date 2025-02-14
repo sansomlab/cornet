@@ -28,7 +28,7 @@ option_list <- list(
   make_option(
     c("--input"),
     default="test/clean.dir/dataInput.RData",
-    help='the input data, genes in rows, samples in columns. A column of identifers, named "gene_id" is required.'
+    help='The clean data RData file.'
   ),
   make_option(
     c("--outdir"),
@@ -38,7 +38,7 @@ option_list <- list(
   make_option(
     c("--outfilename"),
     default="adjacency.RData",
-    help="The name for the file containing the processed data"
+    help="The outfile name"
   ),
   make_option(
     c("--threads"), default=4,
