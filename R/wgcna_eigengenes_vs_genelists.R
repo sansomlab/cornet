@@ -17,7 +17,7 @@ option_list <- list(
     c("--input"),
     default=file.path(rundir,
                       "qn.wgcna.dir/clean.dir/clean.RData"),
-    help="where should the output files be saved"
+    help="The clean data in an RData file"
   ),
   make_option(
     c("--outdir"),
@@ -33,7 +33,7 @@ option_list <- list(
     c("--modules"),
     default=file.path(rundir,
                       "qn.wgcna.dir/modules.dir/modules.RData"),
-    help='the input data, genes in rows, samples in columns. A column of identifers, named "gene_id" is required.'
+    help='the RData file containing the MEs, moduleLabels and moduleColors objects.'
   ),
   make_option(
     c("--genelists"),
