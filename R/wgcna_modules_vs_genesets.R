@@ -27,12 +27,12 @@ stopifnot(
 option_list <- list(
   make_option(c("--input"),
               default="test/traits.dir/membership.tsv",
-              help='the input data, genes in rows, samples in columns. A column of identifers, named "gene_id" is required.'),
+              help='The gene module membership table.'),
   make_option(c("--outdir"), default="test.dir/genesets.dir",
               help="outdir"),
   make_option(c("--module"),
               default="turquoise",
-               help='the RData file containing the MEs, moduleLabels and moduleColors objects.'),
+               help='The module to analyse.'),
   make_option(c("--species"), default="hs",
               help="species: hs or mm"),
   make_option(c("--annotation"),default="none",
@@ -45,8 +45,6 @@ option_list <- list(
               help="comma separated list of gmt files"),
   make_option(c("--gmt_names"), default="none",
               help="comma separated list of names for the gmt files"),
-  make_option(c("--project"), default="WgcnaAnalysis",
-              help="project name"),
   make_option(c("--prefix"), default="genesets",
               help="prefix for out files")
 
