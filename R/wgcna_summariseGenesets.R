@@ -40,8 +40,6 @@ option_list <- list(
     make_option(c("--show_detailed"), default="none",
                 help=paste("comma separated list of names for which to make individual",
                 "per-sample/module plots")),
-    make_option(c("--project"), default="SeuratAnalysis",
-                help="project name"),
     make_option(c("--prefix"), default="genesets",
                 help="expected prefix for source files"),
     make_option(c("--plotdirvar"), default="moduleGenesetsDir",

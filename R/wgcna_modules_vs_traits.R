@@ -29,7 +29,7 @@ option_list <- list(
   make_option(
     c("--input"),
     default="test/clean.dir/dataInput.RData",
-    help='the input data, genes in rows, samples in columns. A column of identifers, named "gene_id" is required.'
+    help='An RData file containing the clean data.'
   ),
   make_option(
     c("--modules"),

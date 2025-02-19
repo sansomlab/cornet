@@ -30,12 +30,12 @@ option_list <- list(
   make_option(
     c("--cleandata"),
     default="test/clean.dir/dataInput.RData",
-    help='the input data, genes in rows, samples in columns. A column of identifers, named "gene_id" is required.'
+    help='An R data file containing the clean data.'
   ),
   make_option(
     c("--tomdata"),
     default="test/modules.dir/TOM.RData",
-    help='the input data, genes in rows, samples in columns. A column of identifers, named "gene_id" is required.'
+    help='the TOM R data file.'
   ),
   make_option(
     c("--outdir"),

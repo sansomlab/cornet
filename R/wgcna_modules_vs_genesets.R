@@ -45,8 +45,6 @@ option_list <- list(
               help="comma separated list of gmt files"),
   make_option(c("--gmt_names"), default="none",
               help="comma separated list of names for the gmt files"),
-  make_option(c("--project"), default="WgcnaAnalysis",
-              help="project name"),
   make_option(c("--prefix"), default="genesets",
               help="prefix for out files")
 

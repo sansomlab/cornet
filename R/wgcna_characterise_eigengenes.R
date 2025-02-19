@@ -25,13 +25,13 @@ option_list <- list(
     c("--eigengenes"),
     default=file.path(rundir,
                       "qn.wgcna.dir/membership.dir/eigengenes.tsv"),
-    help='the input data, genes in rows, samples in columns. A column of identifers, named "gene_id" is required.'
+    help='Samples in rows, modules in columns.'
   ),
   make_option(
     c("--membership"),
     default=file.path(rundir,
                       "qn.wgcna.dir/membership.dir/membership.tsv"),
-    help='the input data, genes in rows, samples in columns. A column of identifers, named "gene_id" is required.'
+    help='Module membership data. A column of identifers, named "gene_id" is required.'
   ),
   make_option(
     c("--params"),
@@ -53,7 +53,7 @@ option_list <- list(
     c("--metadata"),
     default=NULL
     # default=file.path(rundir,"data.dir/qn.dir/meta.data.tsv"),
-    # help='Table containing the trait data. Must contain column "sample_name"'
+    # help='Table containing the metadata. Must contain column "sample_name"'
   ),
   make_option(
       c("--figwidth"),
